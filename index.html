@@ -56,12 +56,24 @@
             cursor: pointer;
         }
 
+        textarea{
+            resize: none;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            box-shadow:  0 1px 4px rgba(0, 0, 0, 0.493);
+        }
+
     </style>
 </head>
 <body>
     <form>
         <p>INSIRA O CONTATO:</p>
         <input type="text" required minlength="10">
+
+        <p>INSIRA O TEXTO (OPCIONAL)</p>''
+        <textarea rows="4" cols="30" ></textarea>
+
         <button type="submit" onclick="abrirConversa()">
             Abrir
         </button>
@@ -70,18 +82,20 @@
     <script>
         const abrirConversa = () =>{
 
-            let texto = document.querySelector('input').value;
+            let numero = document.querySelector('input').value;
+            let texto = encodeURI(document.querySelector('textarea').value)
+            
 
             let numeros = []
-            for(let i=0; i<texto.length; i++){
+            for(let i=0; i<numero.length; i++){
 
-                if(!isNaN(texto[i]) && texto[i]!==' '){
-                    numeros.push(texto[i])
+                if(!isNaN(numero[i]) && numero[i]!==' '){
+                    numeros.push(numero[i])
                 }
             }
             numeros = numeros.join('')
             if(numeros.length > 10){
-                window.open(`https://wa.me/55${numeros}`)
+                window.open(`https://wa.me/55${numeros}?text=${texto}`)
             }
   
         }
